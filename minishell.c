@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/14 14:21:55 by Marty         #+#    #+#                 */
-/*   Updated: 2020/06/02 10:57:18 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/06/02 18:05:19 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		read_input(t_data *e)
 	/**
 	 * Read input
 	 */
-	ret = get_line(&line);
+	ret = get_line(&line, e);
 	if (!ret)
 		return (0);
 	split_cmds_from_params(line, e);
@@ -120,13 +120,10 @@ int		options(t_data *e)
 			open_file(e);
 		if (e->wtf[e->i])
 			init_wtf(e);
-		if (!ft_strcmp(e->cmd[e->i], "ls"))
-			list_dir(e);
+		// if (!ft_strcmp(e->cmd[e->i], "ls"))
+		// 	list_dir(e);
 		else if (!ft_strcmp(e->cmd[e->i], "exit"))
-		{
 			exit(0);
-			// return (1);
-		}
 		else if (!ft_strcmp(e->cmd[e->i], "env"))
 			display_env(e);
 		else if (!ft_strcmp(e->cmd[e->i], "echo"))
@@ -137,16 +134,14 @@ int		options(t_data *e)
 			cut_env(e);
 		else if (!ft_strcmp(e->cmd[e->i], "cd"))
 			change_dir(e);
-		else if (!ft_strcmp(e->cmd[e->i], "rmdir"))
-			remove_dir(e);
-		else if (!ft_strcmp(e->cmd[e->i], "mkdir"))
-			make_dir(e);
+		// else if (!ft_strcmp(e->cmd[e->i], "rmdir"))
+		// 	remove_dir(e);
+		// else if (!ft_strcmp(e->cmd[e->i], "mkdir"))
+		// 	make_dir(e);
 		else if (!ft_strcmp(e->cmd[e->i], "pwd"))
 			get_path(e);
 		else if (!ft_strcmp(e->cmd[e->i], "clear"))
 			e->first = 0;
-		// else if (!ft_strcmp(e->cmd[e->i], "echo"))
-		// 	echo(e);
 		else if (((e->cmd[e->i][0] == '.' && e->cmd[e->i][1] == '/') || e->cmd[e->i][0] == '/') && e->wtf[e->i])
 			exec_to_file(e);
 		else if ((e->cmd[e->i][0] == '.' && e->cmd[e->i][1] == '/') || e->cmd[e->i][0] == '/')
@@ -157,8 +152,16 @@ int		options(t_data *e)
 		e->i++;
 	}
 	e->i = 0;
+	// printf("check\n");
 	while (e->cmd[e->i])
 		free(e->cmd[e->i++]);
+	e->i = 0;
+	while (e->params[e->i] != NULL)
+	{
+		free_array(e->params[e->i], 0);
+		e->i++;
+	}
+	// free(e->og_path);
 	return (0);
 }
 
@@ -174,6 +177,7 @@ int		main(int argc, char **argv, char *envp[])
 	 * e.path = "/";
 	 * chdir(e.path);
 	 */
+	init_cd(&e);
 	init_env(envp, &e);
 	while (1)
 	{

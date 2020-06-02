@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   env_check_input.c                                  :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: robijnvanhouts <robijnvanhouts@student.      +#+                     */
+/*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/06 13:01:43 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/05/27 13:20:50 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/06/02 17:41:18 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,12 @@ int		check_input_add(t_data *e)
 	while (e->params[e->i][j] != NULL)
 	{
 		i = 0;
+		while (e->env[i] != NULL)
+		{
+			if (!ft_strcmp(e->params[e->i][j], e->env[i]))
+				return (0);
+			i++;
+		}
 		while (e->params[e->i][j][i] != '=' && e->params[e->i][j][i] != '\0')
 		{
 			if (!check_char(e->params[e->i][j][i]))

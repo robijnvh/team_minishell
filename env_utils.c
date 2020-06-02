@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/26 15:23:43 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/06/02 10:44:36 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/06/02 13:40:17 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,16 @@ void	free_test(char **str)
 		i++;
 	n = i;
 	i = 0;
-	while (i < n)
+	// printf("check1\n");
+	while (i < n - 1)
 	{
-		free(str[i]);
+		printf("i: %i\n", i);
+		// printf("str: %s\n", str[i]);
+		if (str[i])
+			free(str[i]);
 		i++;
 	}
+	// printf("check2\n");
 	free(str);
 }
 

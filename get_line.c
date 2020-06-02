@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   GNL.c                                              :+:    :+:            */
+/*   get_line.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: Marty <Marty@student.codam.nl>               +#+                     */
+/*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/23 11:06:10 by Marty         #+#    #+#                 */
-/*   Updated: 2020/04/23 15:22:56 by Marty         ########   odam.nl         */
+/*   Updated: 2020/06/02 18:16:03 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,30 @@ char	*read_more(char *str, int *ret)
 	return (str);
 }
 
-int		get_line(char **line)
+int		check_line(char *str, t_data *e)
+{
+	int		quote;
+	int		sin_quote;
+	int		i;
+
+	quote = 0;
+	sin_quote = 0;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\"')
+			quote++;
+		else if (str[i] == '\'')
+			sin_quote++;
+		else if (str[i] == '\n' && quote % 2 == 0 && sin_quote % 2 == 0)
+			return (0);
+		i++;
+	}
+	// printf("check4\n");
+	return (1);
+}
+
+int		get_line(char **line, t_data *e)
 {
 	static char *str;
 	int			ret;
@@ -105,7 +128,7 @@ int		get_line(char **line)
 		str = ft_strdup("");
 	if (!str)
 		return (-1);
-	if (ft_strchr2(str, '\n'))
+	if (ft_strchr2(str, '\n') && !check_line(str, e))
 	{
 		str = get_that_line(str, line);
 		if (!str)
@@ -118,5 +141,5 @@ int		get_line(char **line)
 		return (-1);
 	if (ret == 0)
 		return (write_line(str, line, 0));
-	return (get_line(line));
+	return (get_line(line, e));
 }

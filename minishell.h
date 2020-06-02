@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/04/17 15:43:59 by Marty         #+#    #+#                 */
-/*   Updated: 2020/06/02 10:56:35 by rvan-hou      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvan-hou <rvan-hou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/17 15:43:59 by Marty             #+#    #+#             */
+/*   Updated: 2020/06/02 18:05:38 by rvan-hou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct	minishell
 	char		buf[PATH_MAX];
 	int			first;
 	char		*path;
+	char		*og_path;
 	int			i;
 	int			j;
 	int			ret;
@@ -59,7 +60,7 @@ char				*ft_strchr(const char *s, int c);
 size_t				ft_strlen(const char *s);
 size_t				cnt_prnt_array(char **array, int print, char div);
 int					print(char **array);
-int					get_line(char **line);
+int					get_line(char **line, t_data *e);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strnstr(const char *haystack, const char *needle,
@@ -73,6 +74,7 @@ void				executable(t_data *e);
 void				change_dir(t_data *e);
 void				list_dir(t_data *e);
 void				get_path(t_data *e);
+void				init_cd(t_data *e);
 /* dir */
 void				make_dir(t_data *e);
 void				remove_dir(t_data *e);

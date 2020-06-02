@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/02 10:25:01 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/06/02 10:27:15 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/06/02 17:53:30 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			free_array(char **array, int size)
 			free(array[size]);
 		}
 	else
-		while (array[i])
+		while (array[i] != NULL)
 		{
 			free(array[i]);
 			i++;

@@ -6,17 +6,26 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/02 10:16:19 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/06/02 10:19:42 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/06/02 14:07:53 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	init_cd(t_data *e)
+{
+	char buf[PATH_MAX];
+
+	getcwd(buf, PATH_MAX);
+	e->og_path = ft_strdup(buf);
+}
+
 char	*trim(char *str, int c)
 {
-	int i;
-	int ret;
-	int count;
+	int		i;
+	int		ret;
+	int		count;
+	char	*trim;
 
 	i = 0;
 	ret = 0;
@@ -37,13 +46,23 @@ char	*trim(char *str, int c)
 
 void	change_dir(t_data *e)
 {
+	char	*tmp;
+	
+	if (!e->params[e->i])
+	{
+		e->path = e->og_path;
+		chdir(e->og_path);
+		return ;
+	}
 	getcwd(e->buf, PATH_MAX);
 	if (!ft_strcmp(e->params[e->i][e->j], ".."))
 		e->path = trim(e->buf, '/');
 	else if (e->params[e->i][e->j][0] != '/')
 	{
 		e->path = ft_strjoin("/", e->params[e->i][e->j]);
+		tmp = e->path;
 		e->path = ft_strjoin(e->buf, e->path);
+		free(tmp);
 	}
 	else
 		e->path = ft_strjoin(e->buf, e->params[e->i][e->j]);
