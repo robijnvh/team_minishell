@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/14 14:21:55 by Marty         #+#    #+#                 */
-/*   Updated: 2020/06/02 18:05:19 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/06/03 16:35:06 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	init_struct(t_data *e)
 	i = 0;
 	while (i < 255)
 	{
+		e->par_cnt = 0;
+		e->arr_cnt = 0;
 		e->cmd[i] = NULL;
 		(e->params)[i] = NULL;
 		e->wtf[i] = 0;
@@ -31,33 +33,11 @@ void	init_struct(t_data *e)
 	}
 }
 
-int		split_cmds_from_params(char *line, t_data *e)
+int		split_params(t_data *e, char ***array, char **cmds)
 {
-	char **array[255];
-	char **cmds;
 	int i;
-	int j = 0;
+	int j;
 
-	/**
-	 * Split commands by ;
-	 */
-	cmds = ft_split(line, ';');
-	i = print_array(e, cmds, 0, 0) - 1;
-	i = 0;
-	while (cmds[i])
-	{
-		if (ft_strnstr(cmds[i], ">", strlen(cmds[i])))
-			e->wtf[i] = 1;
-		array[j] = ft_split_params(cmds[i]); // for echo
-		print_array(e, array[j], 0, 0);
-		i++;
-		j++;
-	}
-	array[j] = NULL;
-
-	/**
-	 *	Make cmd and param arrays
-	 */
 	i = 0;
 	while (array[i])
 	{
@@ -88,19 +68,43 @@ int		split_cmds_from_params(char *line, t_data *e)
 	return (0);
 }
 
+int		split_cmds(char *line, t_data *e)
+{
+	char	**array[255];
+	char	**cmds;
+	int		i;
+	int		j;
+
+	cmds = ft_split_actions(line, ';');
+	if (!cmds)
+		return (0);
+	i = print_array(e, cmds, 0, 0) - 1;
+	i = 0;
+	j = 0;
+	while (cmds[i])
+	{
+		if (ft_strnstr(cmds[i], ">", strlen(cmds[i])))
+			e->wtf[i] = 1;
+		array[j] = ft_split_params(cmds[i]);
+		print_array(e, array[j], 0, 0);
+		i++;
+		j++;
+	}
+	array[j] = NULL;
+	split_params(e, array, cmds);
+	return (0);
+}
+
 int		read_input(t_data *e)
 {
 	char	*line;
 	int		ret;
 
 	line = NULL;
-	/**
-	 * Read input
-	 */
 	ret = get_line(&line, e);
 	if (!ret)
 		return (0);
-	split_cmds_from_params(line, e);
+	split_cmds(line, e);
 	free(line);
 	return (1);
 }
@@ -152,7 +156,6 @@ int		options(t_data *e)
 		e->i++;
 	}
 	e->i = 0;
-	// printf("check\n");
 	while (e->cmd[e->i])
 		free(e->cmd[e->i++]);
 	e->i = 0;
@@ -161,7 +164,6 @@ int		options(t_data *e)
 		free_array(e->params[e->i], 0);
 		e->i++;
 	}
-	// free(e->og_path);
 	return (0);
 }
 

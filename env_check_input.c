@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/06 13:01:43 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/06/02 17:41:18 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/06/03 14:16:21 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,6 @@ int		check_input_cut(t_data *e)
 	return (1);
 }
 
-int		ft_strcmp_exp(char *s1, char *s2)
-{
-	int i;
-
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
-		i++;
-	return (s1[i] - s2[i]);
-}
-
 char	**ft_sort(char **order, int n)
 {
 	int		i;
@@ -75,18 +65,28 @@ char	**ft_sort(char **order, int n)
 	return (order);
 }
 
-void	exp_no_params(t_data *e)
+void	free_tmp(char **tmp, int n)
 {
 	int i;
-	int	n;
+
+	i = 0;
+	while (i < n - 1)
+	{
+		free(tmp[i]);
+		i++;
+	}
+	free(tmp);
+}
+
+int		exp_no_params(t_data *e)
+{
+	int		i;
+	int		n;
 	char	**order;
 	char	**tmp;
 
 	i = 0;
-	while (e->env[i] != NULL)
-		i++;
-	n = i;
-	i = 0;
+	n = print_array(e, e->env, 0, '\0');
 	tmp = (char**)malloc(sizeof(char *) * n);
 	while (i < n)
 	{
@@ -102,13 +102,8 @@ void	exp_no_params(t_data *e)
 		ft_putstr("\n");
 		i++;
 	}
-	i = 0;
-	while (i < n - 1)
-	{
-		free(tmp[i]);
-		i++;
-	}
-	free(tmp);
+	free_tmp(tmp, n);
+	return (0);
 }
 
 int		check_input_add(t_data *e)
@@ -117,10 +112,7 @@ int		check_input_add(t_data *e)
 	int	j;
 
 	if (!e->params[e->i])
-	{
-		exp_no_params(e);
-		return (0);
-	}
+		return (exp_no_params(e));
 	j = 0;
 	while (e->params[e->i][j] != NULL)
 	{

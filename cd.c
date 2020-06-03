@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/02 10:16:19 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/06/02 14:07:53 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/06/03 14:04:16 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*trim(char *str, int c)
 void	change_dir(t_data *e)
 {
 	char	*tmp;
-	
+
 	if (!e->params[e->i])
 	{
 		e->path = e->og_path;

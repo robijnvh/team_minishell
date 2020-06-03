@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   split.c                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: robijnvanhouts <robijnvanhouts@student.      +#+                     */
+/*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/15 15:31:45 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/05/27 15:14:09 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/06/03 15:46:41 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 int			ft_isspace(char c)
 {
 	return (c == ' ' || c == '\n' || c == '\t');
-	// return (c == ' ' || c == '\t');
 }
 
 int			ft_isquote(char c)
 {
 	return (c == '\"' || c == '\'');
 }
+
+// int			ft_is_end_quote(char c1, char c2)
+// {
+// 	if ((c1 == '\"' || c1 == '\'') && (c2 == ' ' || c2 == '\n' || c2 == '\t' || c2 == '\0'))
+// 		return (1);
+// 	return (0);
+// }
 
 int		count_words(char *str)
 {
@@ -36,7 +42,8 @@ int		count_words(char *str)
 		{
 			count++;
 			str++;
-			while (*str && !ft_isquote(*str)) // inbouwen dat er een spatie na moet komen
+			// while (*str && (!ft_isquote(*str) || (ft_isquote(*str) && (!ft_isspace(*str + 1) || *str + 1 != '\0'))))  // inbouwen dat er een spatie na moet komen
+			while (*str && !ft_isquote(*str))  // inbouwen dat er een spatie na moet komen
 				str++;
 			str++;
 		}
@@ -93,12 +100,12 @@ char	*malloc_word(char *str)
 	return (word);
 }
 
-// klopt nog niet volledig qua aantal params
 char	**ft_split_params(char *str)
 {
 	int		i;
 	char	**arr;
 
+	// printf("check: %i\n", count_words(str));
 	arr = (char **)malloc(sizeof(char *) * (count_words(str) + 1));
 	i = 0;
 	while (*str)

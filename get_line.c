@@ -6,37 +6,11 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/23 11:06:10 by Marty         #+#    #+#                 */
-/*   Updated: 2020/06/02 18:16:03 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/06/03 15:44:47 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define BUF_SIZE 128
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include "minishell.h"
-
-char	*ft_strchr2(char *str, int c)
-{
-	while (*str)
-	{
-		if (*str == c)
-			return (str + 1);
-		str++;
-	}
-	return (0);
-}
-
-int		ft_strlen2(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] && str[i] != '\n')
-		i++;
-	return (i);
-}
 
 int		write_line(char *str, char **line, int ret)
 {
@@ -49,7 +23,7 @@ int		write_line(char *str, char **line, int ret)
 		free(str);
 		return (-1);
 	}
-	while (str[i] && str[i] != '\n')
+	while (str[i] && str[i] != '\0')
 	{
 		(*line)[i] = str[i];
 		i++;
@@ -69,7 +43,7 @@ char	*get_that_line(char *str, char **line)
 	if (check == -1)
 		return (0);
 	tmp = str;
-	str = ft_strdup(ft_strchr2(str, '\n'));
+	str = ft_strdup(ft_strchr2(str, '\0'));
 	free(tmp);
 	if (!str)
 		return (0);
@@ -115,7 +89,6 @@ int		check_line(char *str, t_data *e)
 			return (0);
 		i++;
 	}
-	// printf("check4\n");
 	return (1);
 }
 

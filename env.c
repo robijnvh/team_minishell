@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/06/02 10:37:31 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/06/02 17:51:04 by rvan-hou      ########   odam.nl         */
+/*   Created: 2020/06/03 15:41:35 by rvan-hou      #+#    #+#                 */
+/*   Updated: 2020/06/03 15:41:44 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,126 +34,42 @@ int		display_env(t_data *e)
 	return (1);
 }
 
-// char	**fill_cpy(t_data *e, int i, int array_cnt, int i3)
-// {
-// 	int		i2;
-// 	int		j;
-// 	char	**tmp;
-
-// 	if (i == (array_cnt - 1))
-// 	{
-// 		i2 = 0;
-// 		while (e->params[e->i][i2] != NULL)
-// 		{
-// 			tmp[i] = (char *)ft_memalloc(PATH_MAX + 1);
-// 			j = 0;
-// 			while (e->params[e->i][i2][j] != '\0')
-// 			{
-// 				tmp[i][j] = e->params[e->i][i2][j];
-// 				j++;
-// 			}
-// 			tmp[i][j] = 0;
-// 			i2++;
-// 			i++;
-// 		}
-// 	}
-// 	tmp[i] = (char *)ft_memalloc(PATH_MAX + 1);
-// 	j = 0;
-// 	while (e->env[i3][j] != '\0')
-// 	{
-// 		tmp[i][j] = e->env[i3][j];
-// 		j++;
-// 	}
-// 	tmp[i][j] = 0;
-// 	return (tmp);
-// }
-
-int		add_env(t_data *e)
+void	find_replace_line(t_data *e, int j)
 {
-	char	**tmp;
 	int		i;
-	int		i2;
-	int		i3;
-	int		j;
-	int		array_cnt;
-	int		param_cnt;
+	char	*tmp;
 
-	if (!check_input_add(e))
-		return (0);
-	array_cnt = print_array(e, e->env, 0, '\0');
-	param_cnt = print_array(e, e->params[e->i], 0, '\0');
-	tmp = (char **)ft_memalloc(sizeof(char*) * (array_cnt + param_cnt + 1));
 	i = 0;
-	i3 = 0;
-	// printf("env: %i, param: %i\n", array_cnt, param_cnt);
-	while (i < (array_cnt + param_cnt))
+	while (e->env[i] != NULL)
 	{
-		if (i == (array_cnt - 1))
+		if (!ft_strcmp_env(e->env[i], e->params[e->i][j],
+		ft_strlen(e->params[e->i][j])))
 		{
-			i2 = 0;
-			while (e->params[e->i][i2] != NULL)
+			while (e->env[i] != NULL)
 			{
-				tmp[i] = (char *)ft_memalloc(PATH_MAX + 1);
-				j = 0;
-				while (e->params[e->i][i2][j] != '\0')
-				{
-					tmp[i][j] = e->params[e->i][i2][j];
-					j++;
-				}
-				tmp[i][j] = 0;
-				i2++;
+				tmp = e->env[i];
+				e->env[i] = e->env[i + 1];
+				free(tmp);
 				i++;
 			}
+			e->env[i] = NULL;
 		}
-		tmp[i] = (char *)ft_memalloc(PATH_MAX + 1);
-		j = 0;
-		while (e->env[i3][j] != '\0')
-		{
-			tmp[i][j] = e->env[i3][j];
-			j++;
-		}
-		tmp[i][j] = 0;
 		i++;
-		i3++;
 	}
-	tmp[i] = NULL;
-	free_array(e->env, 0);
-	e->env = tmp;
-	return (1);
 }
 
 int		cut_env(t_data *e)
 {
-	int		i;
 	int		j;
-	char	*tmp;
 
 	if (!check_input_cut(e))
 		return (0);
-	i = 0;
 	j = 0;
 	while (e->params[e->i][j] != NULL)
 	{
-		while (e->env[i] != NULL)
-		{
-			if (!ft_strcmp_env(e->env[i], e->params[e->i][j],
-			ft_strlen(e->params[e->i][j])))
-			{
-				while (e->env[i] != NULL)
-				{
-					tmp = e->env[i];
-					e->env[i] = e->env[i + 1];
-					free(tmp);
-					i++;
-				}
-				e->env[i] = NULL;
-			}
-			i++;
-		}
+		find_replace_line(e, j);
 		j++;
 	}
-	// i = print_array(e, e->env, 1, '\n');
-	// printf("i: %i\n", i);
 	return (1);
 }
 

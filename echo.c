@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/10 10:17:57 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/06/02 10:42:23 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/06/03 11:09:48 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char		*parse_env(t_data *e, char *name)
 	int			i;
 	int			j;
 	char		**split;
+	char		*tmp;
 
 	i = 0;
 	j = 0;
@@ -41,7 +42,9 @@ char		*parse_env(t_data *e, char *name)
 		if (!ft_strcmp_env(e->env[i], name, ft_strlen(name)))
 		{
 			split = ft_split(e->env[i], '=');
-			return (split[1]);
+			tmp = ft_strdup(split[1]);
+			free_array(split, 0);
+			return (tmp);
 		}
 		i++;
 	}
@@ -55,7 +58,10 @@ int			check_env_echo(char *cmnd, t_data *e)
 	if (cmnd[0] == '$')
 	{
 		if ((tmp = parse_env(e, &cmnd[1])))
+		{
 			ft_putstr(tmp);
+			free(tmp);
+		}
 		return (1);
 	}
 	return (0);

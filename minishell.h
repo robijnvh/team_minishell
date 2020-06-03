@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rvan-hou <rvan-hou@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 15:43:59 by Marty             #+#    #+#             */
-/*   Updated: 2020/06/02 18:05:38 by rvan-hou         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/04/17 15:43:59 by Marty         #+#    #+#                 */
+/*   Updated: 2020/06/03 16:33:45 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define BUF_SIZE 128
 
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -47,6 +49,8 @@ typedef struct	minishell
 	int			fd[255];
 	int			is_child;
 	int			check_quote;
+	int			arr_cnt;
+	int			par_cnt;
 }				t_data;
 
 /* utils */
@@ -60,13 +64,17 @@ char				*ft_strchr(const char *s, int c);
 size_t				ft_strlen(const char *s);
 size_t				cnt_prnt_array(char **array, int print, char div);
 int					print(char **array);
-int					get_line(char **line, t_data *e);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strnstr(const char *haystack, const char *needle,
 					size_t len);
 char				*ft_itoa(int n);
 void				ft_putnbr_fd(int n, int fd);
+char				**ft_split_actions(char const *s, char c);
+/*get line */
+int					get_line(char **line, t_data *e);
+int					ft_strlen2(char *str);
+char				*ft_strchr2(char *str, int c);
 /* exec */
 void				exec_to_file(t_data *e); //26 lines
 void				executable(t_data *e);
@@ -101,8 +109,9 @@ int					check_string(char *str);
 int					ft_strcmp_env(const char *s1, const char *s2, size_t n);
 int					check_input_cut(t_data *e);
 char				**ft_sort(char **order, int n);
-void				exp_no_params(t_data *e);
+int					exp_no_params(t_data *e);
 int					check_input_add(t_data *e);
+int					ft_strcmp_exp(char *s1, char *s2);
 /* echo */
 void				run_echo(t_data *e);
 /* utils 2 */

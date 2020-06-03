@@ -6,23 +6,13 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/06 12:55:14 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/06/02 10:56:16 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/06/03 15:47:18 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// int		ft_strlen(char *str)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (str[i] != '\0')
-// 		i++;
-// 	return (i);
-// }
-
-void    ft_putchar(char c)
+void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
