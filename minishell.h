@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/17 15:43:59 by Marty         #+#    #+#                 */
-/*   Updated: 2020/06/03 16:33:45 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/06/04 14:29:25 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct	minishell
 	int			par_cnt;
 }				t_data;
 
+char				**ft_parser(char const *str, t_data *e);
+int					ft_isspace(char c);
 /* utils */
 int					get_next_line(int fd, char **line);
 int					ft_strcmp(const char *s1, const char *s2);

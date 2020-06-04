@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/14 14:21:55 by Marty         #+#    #+#                 */
-/*   Updated: 2020/06/03 16:35:06 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/06/04 15:34:32 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int		split_cmds(char *line, t_data *e)
 		if (ft_strnstr(cmds[i], ">", strlen(cmds[i])))
 			e->wtf[i] = 1;
 		array[j] = ft_split_params(cmds[i]);
+		// array[j] = ft_parser(cmds[i], e);
 		print_array(e, array[j], 0, 0);
 		i++;
 		j++;

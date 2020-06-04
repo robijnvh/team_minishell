@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/23 11:06:10 by Marty         #+#    #+#                 */
-/*   Updated: 2020/06/03 15:44:47 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/06/04 15:33:15 by rvan-hou      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,21 @@ int		check_line(char *str, t_data *e)
 	quote = 0;
 	sin_quote = 0;
 	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '\"')
-			quote++;
-		else if (str[i] == '\'')
-			sin_quote++;
-		else if (str[i] == '\n' && quote % 2 == 0 && sin_quote % 2 == 0)
-			return (0);
-		i++;
-	}
-	return (1);
+	// while (str[i] != '\0')
+	// {
+	// 	if (str[i] == '\"')
+	// 		quote++;
+	// 	else if (str[i] == '\'')
+	// 		sin_quote++;
+	// 	else if (str[i] == '\n' && quote % 2 == 0 && sin_quote % 2 == 0)
+	// 		return (0);
+	// 	i++;
+	// }
+	// return (1);
+	return (0);
 }
+
+/* check line staat uit! */
 
 int		get_line(char **line, t_data *e)
 {

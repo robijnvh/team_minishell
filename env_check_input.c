@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   env_check_input.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/05/06 13:01:43 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/06/03 14:16:21 by rvan-hou      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   env_check_input.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvan-hou <rvan-hou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/06 13:01:43 by robijnvanho       #+#    #+#             */
+/*   Updated: 2020/06/03 17:32:54 by rvan-hou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,32 +104,4 @@ int		exp_no_params(t_data *e)
 	}
 	free_tmp(tmp, n);
 	return (0);
-}
-
-int		check_input_add(t_data *e)
-{
-	int	i;
-	int	j;
-
-	if (!e->params[e->i])
-		return (exp_no_params(e));
-	j = 0;
-	while (e->params[e->i][j] != NULL)
-	{
-		i = 0;
-		while (e->env[i] != NULL)
-		{
-			if (!ft_strcmp(e->params[e->i][j], e->env[i]))
-				return (0);
-			i++;
-		}
-		while (e->params[e->i][j][i] != '=' && e->params[e->i][j][i] != '\0')
-		{
-			if (!check_char(e->params[e->i][j][i]))
-				return (0);
-			i++;
-		}
-		j++;
-	}
-	return (1);
 }
