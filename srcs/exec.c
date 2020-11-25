@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/02 10:13:11 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/25 13:51:11 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/25 14:11:33 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,32 +108,6 @@ void		return_values(t_data *e)
 		x++;
 	}
 }
-
-// void	execute(t_data *e, char *abspath)
-// {
-// 	struct stat	s;
-
-// 	if (fork())
-// 		e->pids++;
-// 	else
-// 	{
-// 		if (!ft_strcmp(e->params[0], ".") && !e->params[1])
-// 			error_message(e, 3);
-// 		else if (!ft_strcmp(e->params[0], "..") && !e->params[1])
-// 			error_message(e, 5);
-// 		else if ((e->params[0][0] == '/' || e->params[0][0] == '.') &&
-// 		stat(e->params[0], &s) != -1 && S_ISDIR(s.st_mode))
-// 			error_message(e, 7);
-// 		else if ((!abspath && e->params[0][0] != '.' && e->params[0][0] != '/'
-// 		&& stat(e->params[0], &s) < 0))
-// 			error_message(e, 5);
-// 		else if (abspath && execve(abspath, e->params, e->env) == -1)
-// 			error_message(e, 4);
-// 		else if (!abspath && execve(e->params[0], e->params, e->env) == -1)
-// 			error_message(e, 4);
-// 		exit(127);
-// 	}
-// }
 
 void	execute(t_data *e, char *abspath)
 {
