@@ -6,7 +6,7 @@
 /*   By: Marty <Marty@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/17 10:50:58 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/24 14:15:10 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/25 14:00:53 by mramadan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	free_and_stuff(t_data *e, int error, int ex)
 	e->params ? free_array(&e->params) : 0;
 	e->pipe_split ? free_array(&e->pipe_split) : 0;
 	e->bins ? free_array(&e->bins) : 0;
-	e->og_path ? free_and_zero(&e->og_path) : 0;
 	init_struct(e);
 	if (ex)
 	{
