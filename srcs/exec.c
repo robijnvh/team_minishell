@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/02 10:13:11 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/25 13:37:34 by mramadan      ########   odam.nl         */
+/*   Updated: 2020/11/25 13:50:36 by mramadan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	del_quotes(t_data *e)
 	int		i;
 	char	*tmp;
 
-	i = 1;
+	i = 0;
 	while (e->params && e->params[i])
 	{
 		if (e->params[i][0] == '\"' || e->params[i][0] == '\'')
@@ -119,7 +119,8 @@ void	execute(t_data *e, char *abspath)
 	{
 		if (!ft_strcmp(e->params[0], ".") && !e->params[1])
 			error_message(e, 3);
-		else if (!ft_strcmp(e->params[0], "..") && !e->params[1])
+		else if ((!ft_strcmp(e->params[0], "..") && !e->params[1]) ||
+		(e->params[0][0] == '.' && e->params[0][1] != '/'))
 			error_message(e, 5);
 		else if ((e->params[0][0] == '/' || e->params[0][0] == '.') &&
 		stat(e->params[0], &s) != -1 && S_ISDIR(s.st_mode))
