@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/17 15:43:59 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/24 16:42:12 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/25 14:28:26 by mramadan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct		s_data
 	int				first;
 	char			*path;
 	char			*og_path;
-	int				path_count;
 	int				ret;
 	char			**bins;
 	int				pipe_count;
@@ -54,7 +53,7 @@ typedef struct		s_data
 	int				quit;
 	int				quit2;
 	int				write;
-	int				pids; //
+	int				pids;
 	int				is_child;
 }					t_data;
 

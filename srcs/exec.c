@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/02 10:13:11 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/25 14:07:08 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/25 14:35:45 by mramadan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,41 +71,6 @@ void	del_quotes(t_data *e)
 			e->params[i] = tmp;
 		}
 		i++;
-	}
-}
-
-static void	values(t_data *e, int wait)
-{
-	if (WIFEXITED(wait))
-		e->ret = WEXITSTATUS(wait);
-	if (WIFSIGNALED(wait))
-	{
-		e->ret = WTERMSIG(wait);
-		if (e->ret == 2)
-		{
-			e->ret = 130;
-			e->is_child = 1;
-		}
-		if (e->ret == 3)
-		{
-			e->ret = 131;
-			e->is_child = 2;
-		}
-	}
-}
-
-void		return_values(t_data *e)
-{
-	int x;
-	int wait;
-
-	wait = 0;
-	x = 0;
-	while (x < e->pids)
-	{
-		waitpid(-1, &wait, 0);
-		values(e, wait);
-		x++;
 	}
 }
 
