@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/20 10:43:24 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/11/25 10:46:17 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/25 12:42:19 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int		check_cd_arg(t_data *e, int i)
 		e->path = trim(e->buf, '/');
 	else if (e->params[i][0] != '/')
 		e->path = ft_strjoin3(e->buf, "/", e->params[i]);
+	else if (!ft_strncmp(e->params[i], e->og_path, 6))
+		e->path = ft_strdup(e->params[i]);
 	else
 		e->path = ft_strjoin(e->buf, e->params[i]);
 	tmp ? free(tmp) : 0;

@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/14 14:21:55 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/25 10:44:02 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/25 12:27:56 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	zero_struct(t_data *e)
 	e->path_count++;
 	e->first = 0;
 	e->ret = 0;
-	e->path_count = 0;
 	e->is_child = 0;
 	e->new_file = NULL;
 	e->params = NULL;
@@ -37,9 +36,8 @@ void	zero_struct(t_data *e)
 	errno = 0;
 	if (!getcwd(e->buf, PATH_MAX))
 		free_and_stuff(e, 1, 0);
-	// e->og_path = ft_strdup(e->buf);
-	// e->og_path = ft_substr(e->buf, 0, ft_strlen(e->buf));
-	// e->og_path ? 0 : free_and_stuff(e, 0, 1);
+	e->og_path = ft_substr(e->buf, 0, ft_strlen(e->buf));
+	e->og_path ? 0 : free_and_stuff(e, 0, 1);
 }
 
 void	init_struct(t_data *e)
@@ -60,13 +58,6 @@ void	init_struct(t_data *e)
 	errno = 0;
 	if (!getcwd(e->buf, PATH_MAX))
 		free_and_stuff(e, 1, 0);
-	if (e->path_count == 0)
-	{
-		// e->og_path = ft_strdup(e->buf); // waarom niet zo?
-		e->og_path = ft_substr(e->buf, 0, ft_strlen(e->buf));
-		e->og_path ? 0 : free_and_stuff(e, 0, 1);
-		e->path_count = 1;
-	}
 }
 
 void	options(t_data *e)
