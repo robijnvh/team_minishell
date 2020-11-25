@@ -6,41 +6,48 @@
 #    By: rvan-hou <rvan-hou@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/04/17 15:40:10 by Marty         #+#    #+#                  #
-#    Updated: 2020/06/04 14:27:28 by rvan-hou      ########   odam.nl          #
+#    Updated: 2020/11/24 16:40:58 by Marty         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-SRC =	minishell.c get_line.c cd.c ctrl.c dir.c echo.c env_check_input.c \
-		env_utils.c env.c exec.c pwd.c write_to_file.c \
-		utils.c split.c minishell_utils.c export.c get_line_utils.c \
-		split_actions.c parser.c
-
-OBJ = $(SRC:.c=.o)
-
-FLAGS = 
-
-LIBFT = ./srcs/libft.a
-
 NAME = minishell
 
+SRC_DIR = ./srcs
+
+SRC =	minishell.c get_line.c cd.c ctrl.c echo.c \
+		env_check_input.c env_utils.c env.c \
+		export.c exec.c improve_line.c \
+		export_utils.c utils.c split_actions.c \
+		minishell_utils.c pipe.c redirect.c \
+		ft_split_quotes.c trim_for_echo.c write_echo.c \
+		utils_2.c ft_split_quotes_utils.c exit.c \
+		export_env.c free_and_stuff.c cd_utils.c utils_3.c 
+
+FILES = $(addprefix $(SRC_DIR)/, $(SRC))
+
+FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 all: $(NAME)
-%.o: %.c
-	@printf "[minishell] Compiling [.:]\r"
-	@gcc $(FLAGS) -c $< -o $@
-	@printf "[minishell] Compiling [:.]\r"
-$(NAME): $(OBJ)
-	@printf "[minishell] Compiled successfuly! [OK]\n"
-	@gcc $(FLAGS) $(OBJ) $(LIBFT) -g -o $(NAME)
 
-
-# $(NAME): $(OBJ)
-# 	gcc $(FLAGS) $(LIBFT) $(OBJ) -o $(NAME)
+$(NAME): $(FILES)
+	@echo "Remaking libft.a and libftprintf.a"
+	@make re -s -C ./ft_printf
+	@cp ./ft_printf/libftprintf.a .
+	@cp ./ft_printf/libft/libft.a .
+	@gcc $(FLAGS) -I ./include/ $(FILES) libft.a libftprintf.a -o $(NAME)
+	@echo "[minishell] Compiled successfuly! [OK]\n"
 
 clean:
-	rm -f $(OBJ)
+	/bin/rm -f *.o
+	@make clean -s -C ./ft_printf
+	/bin/rm -f libftprintf.a
+	/bin/rm -f libft.a
 
 fclean: clean
-	rm -f $(NAME)
+	@make fclean -s -C ./ft_printf
+	/bin/rm -f libftprintf.a
+	/bin/rm -f libft.a
+	/bin/rm -f minishell
+	/bin/rm -rf minishell.dSYM
 
-re: clean all
+re: fclean all
