@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/03 15:41:35 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/25 10:50:31 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/25 13:19:01 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ int		ft_strcmp_env(const char *s1, const char *s2, size_t n)
 	i = 0;
 	str1 = (unsigned char *)s1;
 	str2 = (unsigned char *)s2;
-	while ((str1[i] != '\0') && str2[i] != '\0' && (n > i))
+	while (str1[i] != '\0' && str2[i] != '\0' && (n > i))
 	{
+		ft_printf(1, "n: %i --- i: %i --- c1: %c --- c2: %c\n", n, i, str1[i], str2[i]);
 		if (str1[i] != str2[i])
 			return (1);
 		i++;
 	}
+	ft_printf(1, "last: c1: %c --- c2: %c\n", str1[i], str2[i]);
 	if (str1[i] == '=' || str1[i] == '\0')
 		return (0);
 	if (str1[i] != str2[i] && i != n)
