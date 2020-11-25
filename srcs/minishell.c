@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/14 14:21:55 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/25 12:27:56 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/25 14:27:50 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		g_ctrl_c = 0;
 
 void	zero_struct(t_data *e)
 {
-	e->path_count++;
 	e->first = 0;
 	e->ret = 0;
 	e->is_child = 0;
