@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/02 10:13:11 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/24 11:48:05 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/25 13:37:34 by mramadan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,35 +134,6 @@ void	execute(t_data *e, char *abspath)
 		exit(127);
 	}
 }
-
-// void	execute(t_data *e, char *abspath)
-// {
-// 	struct stat	s;
-// 	int			status;
-
-// 	status = 0;
-// 	if (fork())
-// 		waitpid(-1, &status, 0);
-// 	else
-// 	{
-// 		if (!ft_strcmp(e->params[0], ".") && !e->params[1])
-// 			error_message(e, 3);
-// 		else if (!ft_strcmp(e->params[0], "..") && !e->params[1])
-// 			error_message(e, 5);
-// 		else if ((e->params[0][0] == '/' || e->params[0][0] == '.') &&
-// 		stat(e->params[0], &s) != -1 && S_ISDIR(s.st_mode))
-// 			error_message(e, 7);
-// 		else if ((!abspath && e->params[0][0] != '.' && e->params[0][0] != '/'
-// 		&& stat(e->params[0], &s) < 0))
-// 			error_message(e, 5);
-// 		else if (abspath && execve(abspath, e->params, e->env) == -1)
-// 			error_message(e, 4);
-// 		else if (!abspath && execve(e->params[0], e->params, e->env) == -1)
-// 			error_message(e, 4);
-// 		exit(127);
-// 	}
-// 	e->ret = WEXITSTATUS(status);
-// }
 
 void	init_execute(t_data *e)
 {
