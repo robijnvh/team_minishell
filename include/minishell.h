@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/17 15:43:59 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/26 10:51:40 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/26 13:59:12 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct		s_data
 	int				first;
 	char			*path;
 	char			*og_path;
-	int				path_count;
 	int				ret;
 	char			**bins;
 	int				pipe_count;
@@ -54,7 +53,7 @@ typedef struct		s_data
 	int				quit;
 	int				quit2;
 	int				write;
-	int				pids; //
+	int				pids;
 	int				is_child;
 }					t_data;
 
@@ -127,5 +126,7 @@ void				return_values(t_data *e);
 int					improve_line(t_data *e);
 void				run_exit(t_data *e);
 int					ft_strcmp_cmd(const char *s1, const char *s2);
+void				del_quotes(t_data *e);
+int					ft_isquote(char c);
 
 #endif

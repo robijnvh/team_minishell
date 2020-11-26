@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/27 14:21:34 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/25 10:49:29 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/26 13:58:36 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	single_quote(char *str, int *i, int fd)
 	}
 }
 
-int	search_env_var(char *str, int *i, t_data *e)
+int		search_env_var(char *str, int *i, t_data *e)
 {
 	int		j;
 	int		l;
@@ -96,11 +96,6 @@ void	found_env(char *str, int fd, t_data *e, int *i)
 		return ;
 	while (is_alpha_num(str[*i]))
 		(*i)++;
-}
-
-int			ft_isquote(char c)
-{
-	return (c == '\"' || c == '\'');
 }
 
 void	write_echo(char *str, int fd, t_data *e)
