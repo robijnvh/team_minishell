@@ -6,11 +6,13 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/20 10:43:24 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/11/25 12:42:19 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/26 13:33:21 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// ff checken toch
 
 void	set_path(t_data *e, char *str)
 {
