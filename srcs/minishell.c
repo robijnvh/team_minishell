@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/14 14:21:55 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/25 14:27:50 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/26 11:51:22 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ void	zero_struct(t_data *e)
 	e->fd_read = -1;
 	e->fd_write = -1;
 	e->pids = 0;
-	e->write = 0;
 	errno = 0;
 	if (!getcwd(e->buf, PATH_MAX))
 		free_and_stuff(e, 1, 0);
-	e->og_path = ft_substr(e->buf, 0, ft_strlen(e->buf));
+	e->og_path = ft_strdup(e->buf);
 	e->og_path ? 0 : free_and_stuff(e, 0, 1);
 }
 

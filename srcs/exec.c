@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/02 10:13:11 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/25 14:11:33 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/26 11:50:54 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	del_quotes(t_data *e)
 	int		i;
 	char	*tmp;
 
-	i = 1;
+	i = 0;
 	while (e->params && e->params[i])
 	{
 		if (e->params[i][0] == '\"' || e->params[i][0] == '\'')
@@ -71,41 +71,6 @@ void	del_quotes(t_data *e)
 			e->params[i] = tmp;
 		}
 		i++;
-	}
-}
-
-static void	values(t_data *e, int wait)
-{
-	if (WIFEXITED(wait))
-		e->ret = WEXITSTATUS(wait);
-	if (WIFSIGNALED(wait))
-	{
-		e->ret = WTERMSIG(wait);
-		if (e->ret == 2)
-		{
-			e->ret = 130;
-			e->is_child = 1;
-		}
-		if (e->ret == 3)
-		{
-			e->ret = 131;
-			e->is_child = 2;
-		}
-	}
-}
-
-void		return_values(t_data *e)
-{
-	int x;
-	int wait;
-
-	wait = 0;
-	x = 0;
-	while (x < e->pids)
-	{
-		waitpid(-1, &wait, 0);
-		values(e, wait);
-		x++;
 	}
 }
 
@@ -119,7 +84,8 @@ void	execute(t_data *e, char *abspath)
 	{
 		if (!ft_strcmp(e->params[0], ".") && !e->params[1])
 			error_message(e, 3);
-		else if (!ft_strcmp(e->params[0], "..") && !e->params[1])
+		else if ((!ft_strcmp(e->params[0], "..") && !e->params[1]) ||
+		(e->params[0][0] == '.' && e->params[0][1] != '/'))
 			error_message(e, 5);
 		else if ((e->params[0][0] == '/' || e->params[0][0] == '.') &&
 		stat(e->params[0], &s) != -1 && S_ISDIR(s.st_mode))
