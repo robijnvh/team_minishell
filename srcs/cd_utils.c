@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/20 10:43:24 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/11/26 13:57:29 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/26 14:06:59 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		wrong_cd_arg(t_data *e, int i, int *check)
 {
 	if (e->params[i][0] != '$' && *check == 0)
 	{
-		ft_printf(2, "bash: cd: %s: %s\n", e->params[1], strerror(errno));
+		ft_printf(2, "minishell: cd: %s: %s\n", e->params[1], strerror(errno));
 		return (0);
 	}
 	else
