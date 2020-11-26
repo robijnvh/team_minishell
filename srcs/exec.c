@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/02 10:13:11 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/25 14:35:45 by mramadan      ########   odam.nl         */
+/*   Updated: 2020/11/26 11:59:22 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,24 @@ int		find_cmd_in_bin(t_data *e, char **bins, char *cmd)
 char	*construct_cmd_path(t_data *e)
 {
 	char	*abspath;
+	char	*tmp;
 	int		i;
 
 	if (e->params[0][0] == '/')
 		return (NULL);
-	i = -1;
+	if (ft_strnstr(e->params[0], "../", 3))
+	{
+		i = 0;
+		abspath = ft_strdup(e->buf);
+		while (ft_strnstr(e->params[0] + i, "../", 3))
+		{
+			tmp = abspath;
+			abspath = trim(tmp, '/');
+			free(tmp);
+			i += 3;
+		}
+		return (ft_strjoin3(abspath, "/", e->params[0] + i));
+	}
 	i = find_cmd_in_bin(e, e->bins, e->params[0]);
 	if (i < 0)
 		return (NULL);
@@ -82,7 +95,9 @@ void	execute(t_data *e, char *abspath)
 		e->pids++;
 	else
 	{
-		if (!ft_strcmp(e->params[0], ".") && !e->params[1])
+		if (abspath && execve(abspath, e->params, e->env) == -1)
+			error_message(e, 4);
+		else if (!ft_strcmp(e->params[0], ".") && !e->params[1])
 			error_message(e, 3);
 		else if ((!ft_strcmp(e->params[0], "..") && !e->params[1]) ||
 		(e->params[0][0] == '.' && e->params[0][1] != '/'))
@@ -93,26 +108,21 @@ void	execute(t_data *e, char *abspath)
 		else if ((!abspath && e->params[0][0] != '.' && e->params[0][0] != '/'
 		&& stat(e->params[0], &s) < 0))
 			error_message(e, 5);
-		else if (abspath && execve(abspath, e->params, e->env) == -1)
-			error_message(e, 4);
 		else if (!abspath && execve(e->params[0], e->params, e->env) == -1)
 			error_message(e, 4);
 		exit(127);
 	}
+	abspath ? free(abspath) : 0;
 }
 
 void	init_execute(t_data *e)
 {
-	char *abspath;
-
 	del_quotes(e);
 	if (find_bin_paths(e) && e->params[0][0] != '/')
 	{
 		free_and_stuff(e, 6, 0);
 		return ;
 	}
-	abspath = construct_cmd_path(e);
-	execute(e, abspath);
-	abspath ? free(abspath) : 0;
+	execute(e, construct_cmd_path(e));
 	e->bins ? free_array(&e->bins) : 0;
 }

@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/14 14:21:55 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/25 14:43:13 by mramadan      ########   odam.nl         */
+/*   Updated: 2020/11/26 10:29:46 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,6 @@ void	zero_struct(t_data *e)
 		free_and_stuff(e, 1, 0);
 	e->og_path = ft_strdup(e->buf);
 	e->og_path ? 0 : free_and_stuff(e, 0, 1);
-}
-
-void	init_struct(t_data *e)
-{
-	e->new_file = NULL;
-	e->params = NULL;
-	e->pipe_split = NULL;
-	e->pipe = NULL;
-	e->path = NULL;
-	e->bins = NULL;
-	e->re_in = -1;
-	e->re_out = -1;
-	e->pipe_count = 0;
-	e->fd_read = -1;
-	e->fd_write = -1;
-	e->pids = 0;
-	e->write = 0;
-	errno = 0;
-	if (!getcwd(e->buf, PATH_MAX))
-		free_and_stuff(e, 1, 0);
 }
 
 void	options(t_data *e)
