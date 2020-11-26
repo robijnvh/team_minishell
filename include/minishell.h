@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/17 15:43:59 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/25 14:28:26 by mramadan      ########   odam.nl         */
+/*   Updated: 2020/11/26 13:35:16 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,6 @@ void				return_values(t_data *e);
 int					improve_line(t_data *e);
 void				run_exit(t_data *e);
 int					ft_strcmp_cmd(const char *s1, const char *s2);
+void				del_quotes(t_data *e);
 
 #endif

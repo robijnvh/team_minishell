@@ -6,7 +6,7 @@
 #    By: rvan-hou <rvan-hou@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/04/17 15:40:10 by Marty         #+#    #+#                  #
-#    Updated: 2020/11/24 16:40:58 by Marty         ########   odam.nl          #
+#    Updated: 2020/11/26 13:37:35 by Marty         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,11 @@ SRC =	minishell.c get_line.c cd.c ctrl.c echo.c \
 		minishell_utils.c pipe.c redirect.c \
 		ft_split_quotes.c trim_for_echo.c write_echo.c \
 		utils_2.c ft_split_quotes_utils.c exit.c \
-		export_env.c free_and_stuff.c cd_utils.c utils_3.c 
+		export_env.c free_and_stuff.c cd_utils.c utils_3.c utils_4.c
 
 FILES = $(addprefix $(SRC_DIR)/, $(SRC))
 
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 all: $(NAME)
 

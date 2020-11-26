@@ -6,7 +6,7 @@
 /*   By: Marty <Marty@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 15:16:09 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/26 10:29:38 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/26 13:34:00 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,22 +80,20 @@ void	return_values(t_data *e)
 	}
 }
 
-void	init_struct(t_data *e)
+void	del_quotes(t_data *e)
 {
-	e->new_file = NULL;
-	e->params = NULL;
-	e->pipe_split = NULL;
-	e->pipe = NULL;
-	e->path = NULL;
-	e->bins = NULL;
-	e->re_in = -1;
-	e->re_out = -1;
-	e->pipe_count = 0;
-	e->fd_read = -1;
-	e->fd_write = -1;
-	e->pids = 0;
-	e->write = 0;
-	errno = 0;
-	if (!getcwd(e->buf, PATH_MAX))
-		free_and_stuff(e, 1, 0);
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (e->params && e->params[i])
+	{
+		if (e->params[i][0] == '\"' || e->params[i][0] == '\'')
+		{
+			tmp = ft_substr(e->params[i], 1, ft_strlen(e->params[i]) - 2);
+			free(e->params[i]);
+			e->params[i] = tmp;
+		}
+		i++;
+	}
 }
