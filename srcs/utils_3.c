@@ -6,7 +6,7 @@
 /*   By: Marty <Marty@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 15:16:09 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/24 16:39:42 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/26 12:07:22 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,59 @@ int		ft_strcmp_cmd(const char *s1, const char *s2)
 	while (s1[i] && s2[i] && ((s1[i] == s2[i]) || (s1[i] == s2[i] - 32)))
 		i++;
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+void	values(t_data *e, int wait)
+{
+	if (WIFEXITED(wait))
+		e->ret = WEXITSTATUS(wait);
+	if (WIFSIGNALED(wait))
+	{
+		e->ret = WTERMSIG(wait);
+		if (e->ret == 2)
+		{
+			e->ret = 130;
+			e->is_child = 1;
+		}
+		if (e->ret == 3)
+		{
+			e->ret = 131;
+			e->is_child = 2;
+		}
+	}
+}
+
+void	return_values(t_data *e)
+{
+	int x;
+	int wait;
+
+	wait = 0;
+	x = 0;
+	while (x < e->pids)
+	{
+		waitpid(-1, &wait, 0);
+		values(e, wait);
+		x++;
+	}
+}
+
+void	init_struct(t_data *e)
+{
+	e->new_file = NULL;
+	e->params = NULL;
+	e->pipe_split = NULL;
+	e->pipe = NULL;
+	e->path = NULL;
+	e->bins = NULL;
+	e->re_in = -1;
+	e->re_out = -1;
+	e->pipe_count = 0;
+	e->fd_read = -1;
+	e->fd_write = -1;
+	e->pids = 0;
+	e->write = 0;
+	errno = 0;
+	if (!getcwd(e->buf, PATH_MAX))
+		free_and_stuff(e, 1, 0);
 }

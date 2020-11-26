@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   cd_utils.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: Marty <Marty@student.codam.nl>               +#+                     */
+/*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/23 15:11:56 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/24 16:21:51 by Marty         ########   odam.nl         */
+/*   Created: 2020/11/20 10:43:24 by robijnvanho   #+#    #+#                 */
+/*   Updated: 2020/11/25 12:42:19 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,25 @@ int		check_cd_arg(t_data *e, int i)
 		e->path = trim(e->buf, '/');
 	else if (e->params[i][0] != '/')
 		e->path = ft_strjoin3(e->buf, "/", e->params[i]);
+	else if (!ft_strncmp(e->params[i], e->og_path, 6))
+		e->path = ft_strdup(e->params[i]);
 	else
 		e->path = ft_strjoin(e->buf, e->params[i]);
 	tmp ? free(tmp) : 0;
+	e->path ? 0 : free_and_stuff(e, 0, 1);
 	return (1);
 }
 
 int		wrong_cd_arg(t_data *e, int i, int *check)
 {
-	e->ret = 1;
 	if (e->params[i][0] != '$' && *check == 0)
 	{
-		ft_printf(2, "minishell: cd: %s: %s\n", e->params[1], strerror(errno));
+		ft_printf(2, "bash: cd: %s: %s\n", e->params[1], strerror(errno));
 		return (0);
 	}
 	else
 		only_cd(e, 3);
+	e->ret = 1;
 	*check = 0;
 	return (1);
 }

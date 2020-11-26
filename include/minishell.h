@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/17 15:43:59 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/24 16:42:12 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/26 10:51:40 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int					add_env(t_data *e);
 int					cut_env(t_data *e);
 int					check_char(char c, int i, int j, t_data *e);
 int					check_string(char *str);
-int					ft_strcmp_env(const char *s1, const char *s2, size_t n);
+int					ft_strcmp_env(char *str1, char *str2, int n);
 int					check_input_cut(t_data *e, int j);
 int					exp_no_params(t_data *e);
 int					ft_strcmp_exp(char *s1, char *s2);

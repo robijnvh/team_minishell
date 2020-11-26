@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/02 10:13:11 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/25 13:27:06 by mramadan      ########   odam.nl         */
+/*   Updated: 2020/11/26 13:31:39 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,24 @@ int		find_cmd_in_bin(t_data *e, char **bins, char *cmd)
 char	*construct_cmd_path(t_data *e)
 {
 	char	*abspath;
+	char	*tmp;
 	int		i;
 
 	if (e->params[0][0] == '/')
 		return (NULL);
-	i = -1;
+	if (ft_strnstr(e->params[0], "../", 3))
+	{
+		i = 0;
+		abspath = ft_strdup(e->buf);
+		while (ft_strnstr(e->params[0] + i, "../", 3))
+		{
+			tmp = abspath;
+			abspath = trim(tmp, '/');
+			free(tmp);
+			i += 3;
+		}
+		return (ft_strjoin3(abspath, "/", e->params[0] + i));
+	}
 	i = find_cmd_in_bin(e, e->bins, e->params[0]);
 	if (i < 0)
 		return (NULL);
@@ -61,7 +74,7 @@ void	del_quotes(t_data *e)
 	int		i;
 	char	*tmp;
 
-	i = 1;
+	i = 0;
 	while (e->params && e->params[i])
 	{
 		if (e->params[i][0] == '\"' || e->params[i][0] == '\'')
@@ -74,41 +87,6 @@ void	del_quotes(t_data *e)
 	}
 }
 
-static void	values(t_data *e, int wait)
-{
-	if (WIFEXITED(wait))
-		e->ret = WEXITSTATUS(wait);
-	if (WIFSIGNALED(wait))
-	{
-		e->ret = WTERMSIG(wait);
-		if (e->ret == 2)
-		{
-			e->ret = 130;
-			e->is_child = 1;
-		}
-		if (e->ret == 3)
-		{
-			e->ret = 131;
-			e->is_child = 2;
-		}
-	}
-}
-
-void		return_values(t_data *e)
-{
-	int x;
-	int wait;
-
-	wait = 0;
-	x = 0;
-	while (x < e->pids)
-	{
-		waitpid(-1, &wait, 0);
-		values(e, wait);
-		x++;
-	}
-}
-
 void	execute(t_data *e, char *abspath)
 {
 	struct stat	s;
@@ -117,9 +95,12 @@ void	execute(t_data *e, char *abspath)
 		e->pids++;
 	else
 	{
-		if (!ft_strcmp(e->params[0], ".") && !e->params[1])
+		if (abspath && execve(abspath, e->params, e->env) == -1)
+			error_message(e, 4);
+		else if (!ft_strcmp(e->params[0], ".") && !e->params[1])
 			error_message(e, 3);
-		else if (!ft_strcmp(e->params[0], "..") && !e->params[1])
+		else if ((!ft_strcmp(e->params[0], "..") && !e->params[1]) ||
+		(e->params[0][0] == '.' && e->params[0][1] != '/'))
 			error_message(e, 5);
 		else if ((e->params[0][0] == '/' || e->params[0][0] == '.') &&
 		stat(e->params[0], &s) != -1 && S_ISDIR(s.st_mode))
@@ -127,26 +108,21 @@ void	execute(t_data *e, char *abspath)
 		else if ((!abspath && e->params[0][0] != '.' && e->params[0][0] != '/'
 		&& stat(e->params[0], &s) < 0))
 			error_message(e, 5);
-		else if (abspath && execve(abspath, e->params, e->env) == -1)
-			error_message(e, 4);
 		else if (!abspath && execve(e->params[0], e->params, e->env) == -1)
 			error_message(e, 4);
 		exit(127);
 	}
+	abspath ? free(abspath) : 0;
 }
 
 void	init_execute(t_data *e)
 {
-	char *abspath;
-
 	del_quotes(e);
 	if (find_bin_paths(e) && e->params[0][0] != '/')
 	{
 		free_and_stuff(e, 6, 0);
 		return ;
 	}
-	abspath = construct_cmd_path(e);
-	execute(e, abspath);
-	abspath ? free(abspath) : 0;
+	execute(e, construct_cmd_path(e));
 	e->bins ? free_array(&e->bins) : 0;
 }

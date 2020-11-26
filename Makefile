@@ -6,7 +6,7 @@
 #    By: rvan-hou <rvan-hou@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/04/17 15:40:10 by Marty         #+#    #+#                  #
-#    Updated: 2020/11/24 16:40:58 by Marty         ########   odam.nl          #
+#    Updated: 2020/11/26 11:02:58 by robijnvanho   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC =	minishell.c get_line.c cd.c ctrl.c echo.c \
 
 FILES = $(addprefix $(SRC_DIR)/, $(SRC))
 
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 all: $(NAME)
 

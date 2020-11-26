@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/14 14:21:55 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/24 16:38:10 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/26 12:05:45 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ int		g_ctrl_c = 0;
 
 void	zero_struct(t_data *e)
 {
-	e->path_count++;
 	e->first = 0;
 	e->ret = 0;
-	e->path_count = 0;
 	e->is_child = 0;
 	e->new_file = NULL;
 	e->params = NULL;
@@ -36,34 +34,8 @@ void	zero_struct(t_data *e)
 	errno = 0;
 	if (!getcwd(e->buf, PATH_MAX))
 		free_and_stuff(e, 1, 0);
-	if (e->path_count == 0)
-		e->og_path = ft_strdup(e->buf);
-}
-
-void	init_struct(t_data *e)
-{
-	e->new_file = NULL;
-	e->params = NULL;
-	e->pipe_split = NULL;
-	e->pipe = NULL;
-	e->path = NULL;
-	e->bins = NULL;
-	e->re_in = -1;
-	e->re_out = -1;
-	e->pipe_count = 0;
-	e->fd_read = -1;
-	e->fd_write = -1;
-	e->pids = 0;
-	errno = 0;
-	if (!getcwd(e->buf, PATH_MAX))
-		free_and_stuff(e, 1, 0);
-	if (e->path_count == 0)
-	{
-		e->og_path = ft_strdup(e->buf); // waarom niet zo?
-		e->og_path = ft_substr(e->buf, 0, ft_strlen(e->buf));
-		e->og_path ? 0 : free_and_stuff(e, 0, 1);
-		e->path_count = 1;
-	}
+	e->og_path = ft_strdup(e->buf);
+	e->og_path ? 0 : free_and_stuff(e, 0, 1);
 }
 
 void	options(t_data *e)
