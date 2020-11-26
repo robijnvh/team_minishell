@@ -6,29 +6,25 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/03 15:41:35 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/25 13:45:26 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/26 10:57:32 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_strcmp_env(const char *s1, const char *s2, size_t n)
+int		ft_strcmp_env(char *str1, char *str2, int n)
 {
-	size_t				i;
-	const unsigned char	*str1;
-	const unsigned char	*str2;
+	int				i;
 
 	i = 0;
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	while (str1[i] != '\0' && str2[i] != '\0' && (n > i))
+	if (!str1 || !str2 || !n)
+		return (1);
+	while (str1[i] && str2[i] && i < n)
 	{
-		ft_printf(1, "n: %i --- i: %i --- c1: %c --- c2: %c\n", n, i, str1[i], str2[i]);
 		if (str1[i] != str2[i])
 			return (1);
 		i++;
 	}
-	ft_printf(1, "last: c1: %c --- c2: %c\n", str1[i], str2[i]);
 	if (str1[i] == '=' || str1[i] == '\0')
 		return (0);
 	if (str1[i] != str2[i] && i != n)
@@ -79,6 +75,7 @@ void	find_replace_line(t_data *e, int j)
 			}
 			free(tmp);
 			e->env[i] = NULL;
+			return ;
 		}
 		i++;
 	}
