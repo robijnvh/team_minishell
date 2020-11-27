@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/20 10:43:24 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/11/26 14:08:45 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/27 11:24:12 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int		check_cd_arg(t_data *e, int i)
 {
 	char	*tmp;
 
-	tmp = NULL;
 	tmp = e->path;
 	if (check_spaces_in_path(e, i, 0) &&
 	!(chdir(e->path) == -1 && chdir(e->params[i]) == -1))
@@ -66,6 +65,7 @@ int		check_cd_arg(t_data *e, int i)
 
 int		wrong_cd_arg(t_data *e, int i, int *check)
 {
+	e->ret = 1;
 	if (e->params[i][0] != '$' && *check == 0)
 	{
 		ft_printf(2, "minishell: cd: %s: %s\n", e->params[1], strerror(errno));
@@ -73,7 +73,6 @@ int		wrong_cd_arg(t_data *e, int i, int *check)
 	}
 	else
 		only_cd(e, 3);
-	e->ret = 1;
 	*check = 0;
 	return (1);
 }
