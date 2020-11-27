@@ -6,23 +6,22 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/02 10:13:11 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/26 13:48:47 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/27 11:58:11 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		find_cmd_in_bin(t_data *e, char **bins, char *cmd)
+int		find_cmd_in_bin(t_data *e, char **bins, char *cmd, int i)
 {
 	DIR				*dir;
 	struct dirent	*sd;
-	int				i;
 
-	i = 0;
 	while (bins[i])
 	{
 		dir = opendir(bins[i]);
-		errno ? free_and_stuff(e, 1, 1) : 0;
+		if (errno)
+			return (-1);
 		while (1)
 		{
 			sd = readdir(dir);
@@ -83,7 +82,7 @@ char	*construct_cmd_path(t_data *e)
 		}
 		return (ft_strjoin3(abspath, "/", e->params[0] + i));
 	}
-	i = find_cmd_in_bin(e, e->bins, e->params[0]);
+	i = find_cmd_in_bin(e, e->bins, e->params[0], 0);
 	if (i < 0)
 		return (NULL);
 	return (ft_strjoin3(e->bins[i], "/", e->params[0]));
