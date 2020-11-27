@@ -6,7 +6,7 @@
 /*   By: Marty <Marty@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/26 13:34:13 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/26 13:34:33 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/27 11:19:23 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,9 @@ void	init_struct(t_data *e)
 	errno = 0;
 	if (!getcwd(e->buf, PATH_MAX))
 		free_and_stuff(e, 1, 0);
+}
+
+int		ft_isquote(char c)
+{
+	return (c == '\"' || c == '\'');
 }

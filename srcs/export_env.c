@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   export_env.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: robijnvanhouts <robijnvanhouts@student.      +#+                     */
+/*   By: Marty <Marty@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/05 12:38:31 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/11/24 16:31:24 by Marty         ########   odam.nl         */
+/*   Created: 2020/11/27 11:11:16 by Marty         #+#    #+#                 */
+/*   Updated: 2020/11/27 11:11:19 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
