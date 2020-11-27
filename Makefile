@@ -6,7 +6,7 @@
 #    By: rvan-hou <rvan-hou@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/04/17 15:40:10 by Marty         #+#    #+#                  #
-#    Updated: 2020/11/26 13:49:54 by Marty         ########   odam.nl          #
+#    Updated: 2020/11/27 11:40:14 by Marty         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC =	minishell.c get_line.c cd.c ctrl.c echo.c \
 
 FILES = $(addprefix $(SRC_DIR)/, $(SRC))
 
-FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
@@ -48,6 +48,5 @@ fclean: clean
 	/bin/rm -f libftprintf.a
 	/bin/rm -f libft.a
 	/bin/rm -f minishell
-	/bin/rm -rf minishell.dSYM
 
 re: fclean all
