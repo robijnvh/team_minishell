@@ -6,7 +6,7 @@
 #    By: rvan-hou <rvan-hou@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/11/28 18:16:52 by rvan-hou      #+#    #+#                  #
-#    Updated: 2020/11/25 11:00:48 by robijnvanho   ########   odam.nl          #
+#    Updated: 2020/11/27 11:23:28 by Marty         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ $(NAME): $(OBJ)
 clean:
 	@make clean -s -C ./libft
 	/bin/rm -f libft.a
+	/bin/rm -f ./libft/libft.a
 	/bin/rm -f $(OBJ)
 
 fclean: clean
