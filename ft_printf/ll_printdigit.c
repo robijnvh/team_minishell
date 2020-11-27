@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ll_printdigit.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: robijnvanhouts <robijnvanhouts@student.      +#+                     */
+/*   By: Marty <Marty@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/27 11:28:10 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/11/27 11:28:17 by robijnvanho   ########   odam.nl         */
+/*   Created: 2020/11/27 11:35:18 by Marty         #+#    #+#                 */
+/*   Updated: 2020/11/27 11:35:22 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
