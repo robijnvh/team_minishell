@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   setptr.c                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: robijnvanhouts <robijnvanhouts@student.      +#+                     */
+/*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/15 13:39:22 by robijnvanho    #+#    #+#                */
-/*   Updated: 2019/12/15 13:54:20 by robijnvanho   ########   odam.nl         */
+/*   Created: 2019/11/28 18:17:27 by rvan-hou      #+#    #+#                 */
+/*   Updated: 2020/11/27 11:31:10 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

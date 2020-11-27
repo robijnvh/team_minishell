@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   printdigit.c                                       :+:    :+:            */
+/*   ll_printdigit.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rvan-hou <marvin@codam.nl>                   +#+                     */
+/*   By: robijnvanhouts <robijnvanhouts@student.      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/11 11:38:47 by rvan-hou       #+#    #+#                */
-/*   Updated: 2019/12/15 13:22:24 by robijnvanho   ########   odam.nl         */
+/*   Created: 2020/11/27 11:28:10 by robijnvanho   #+#    #+#                 */
+/*   Updated: 2020/11/27 11:28:17 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
