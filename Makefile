@@ -6,7 +6,7 @@
 #    By: rvan-hou <rvan-hou@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/04/17 15:40:10 by Marty         #+#    #+#                  #
-#    Updated: 2020/11/27 12:08:42 by Marty         ########   odam.nl          #
+#    Updated: 2020/11/30 15:23:02 by Marty         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRC =	minishell.c get_line.c cd.c ctrl.c echo.c \
 		minishell_utils.c pipe.c redirect.c \
 		ft_split_quotes.c trim_for_echo.c write_echo.c \
 		utils_2.c ft_split_quotes_utils.c exit.c \
-		export_env.c free_and_stuff.c cd_utils.c utils_3.c utils_4.c
+		export_env.c free_and_stuff.c cd_utils.c utils_3.c utils_4.c \
+		check_env_vars.c
 
 FILES = $(addprefix $(SRC_DIR)/, $(SRC))
 

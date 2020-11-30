@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:12:16 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/17 10:54:17 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/30 11:01:40 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ int		is_alpha_no_num(char c)
 
 char	*ft_strchr2(char *str, int c)
 {
+	if (!str)
+		return (NULL);
 	while (*str)
 	{
 		if (*str == c)
 			return (str + 1);
 		str++;
 	}
-	return (0);
+	return (NULL);
 }
 
 int		ft_strlen2(char *str)

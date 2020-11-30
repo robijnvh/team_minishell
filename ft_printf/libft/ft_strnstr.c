@@ -6,7 +6,7 @@
 /*   By: rvan-hou <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 09:37:40 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2019/10/30 09:37:41 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/11/29 12:13:09 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		}
 		i++;
 	}
-	return (0);
+	return (NULL);
 }

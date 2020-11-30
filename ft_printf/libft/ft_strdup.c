@@ -6,7 +6,7 @@
 /*   By: rvan-hou <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/28 14:12:13 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2019/10/28 14:12:14 by rvan-hou      ########   odam.nl         */
+/*   Updated: 2020/11/30 14:49:13 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,13 @@ char	*ft_strdup(const char *src)
 {
 	int			i;
 	char		*copy;
-	int			len;
 
-	len = 0;
 	i = 0;
 	if (!src)
-		copy = (char*)src;
+		return (NULL);
 	while (src[i] != '\0')
-	{
 		i++;
-		len++;
-	}
-	copy = (char *)malloc(sizeof(*src) * (len + 1));
+	copy = (char *)malloc(sizeof(*src) * (i + 1));
 	if (!copy)
 		return (NULL);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/03 15:40:59 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/25 10:47:31 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/30 15:23:10 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int		add_env(t_data *e)
 
 	if (!e->params[1])
 		return (exp_no_params(e));
+	check_for_env_vars(e);
 	if (!check_input_add(e))
 		return (0);
 	e->arr_cnt = print_array(e->env, 0, '\0');
