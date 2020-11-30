@@ -6,7 +6,7 @@
 /*   By: Marty <Marty@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/26 13:34:13 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/27 11:22:04 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/30 15:35:36 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,13 @@ void	init_struct(t_data *e)
 int		ft_isquote(char c)
 {
 	return (c == '\"' || c == '\'');
+}
+
+int		ft_isspace(int c)
+{
+	c = (unsigned char)c;
+	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
+		|| c == ' ')
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/17 15:43:59 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/26 13:59:12 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/30 15:35:54 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int					get_line(char **line);
 void				*ft_memalloc(size_t size);
 void				ft_putstr_exp(char *s);
 int					ft_isquote(char c);
-int					ft_isspace(char c);
+int					ft_isspace(int c);
 void				ft_putstr_no_quotes(char *s);
 int					count_chars(char *str, char a, char b);
 int					count_quote(char *s, char c);

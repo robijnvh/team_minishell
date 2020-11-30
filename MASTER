@@ -1,0 +1,21 @@
+test cd:
+
+export var3="/team_minishell/hoi hoi" ; export var5=/team_minishell/hoi\ hoi ; export
+
+\\test1:
+\\pwd ; cd ; pwd ; cd $var1 ; pwd
+
+\\test2:
+\\pwd ; cd ; pwd ; cd $var2 ; pwd
+
+test3:
+pwd ; cd .. ; pwd ; cd $var3 ; pwd
+
+\\test4:
+\\pwd ; cd .. ; pwd ; cd $var4 ; pwd
+
+test5:
+pwd ; cd .. ; pwd ; cd $var5 ; pwd
+
+\\test6:
+\\pwd ; cd .. ; pwd ; cd $var6 ; pwd
