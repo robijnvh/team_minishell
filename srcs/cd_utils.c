@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/20 10:43:24 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/11/27 11:24:12 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/11/30 12:00:50 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,67 @@ void	set_path(t_data *e, char *str)
 	}
 }
 
+int		remove_quotes(t_data *e, int i)
+{
+	int		quotes;
+	char	*tmp;
+
+	quotes = 0;
+	tmp = NULL;
+	if (e->params[i][0] == '\'' &&
+	e->params[i][ft_strlen(e->params[i]) - 1] == '\'')
+		quotes = 1;
+	else if (e->params[i][0] == '"' &&
+	e->params[i][ft_strlen(e->params[i]) - 1] == '"')
+		quotes = 1;
+	if (quotes == 1)
+	{
+		tmp = e->params[i];
+		e->params[i] = ft_substr(e->params[i], 1, ft_strlen(e->params[i]) - 2);
+		if (!e->params[i])
+		{
+			free_and_stuff(e, 0, 1);
+			return (0);
+		}
+		free(tmp);
+	}
+	return (1);
+}
+
+int		replace_env_var(t_data *e, int i)
+{
+	int		env;
+	char	*tmp;
+	int		j;
+
+	tmp = NULL;
+	env = check_for_env(e, i);
+	if (env == -1)
+		return (1);
+	j = 0;
+	while (e->env[env][j] != '=' && e->env[env][j] != '\0')
+		j++;
+	if (e->env[env][j] != '=')
+		return (1);
+	j++;
+	tmp = e->params[i];
+	e->params[i] = ft_substr(e->env[env], j, ft_strlen(e->env[env]) - j);
+	if (!e->params[i])
+	{
+		free_and_stuff(e, 0, 1);
+		return (0);
+	}
+	free(tmp);
+	return (1);
+}
+
 int		check_cd_arg(t_data *e, int i)
 {
 	char	*tmp;
 
 	tmp = e->path;
+	if (!replace_env_var(e, i) || !remove_quotes(e, i))
+		return (0);
 	if (check_spaces_in_path(e, i, 0) &&
 	!(chdir(e->path) == -1 && chdir(e->params[i]) == -1))
 	{
