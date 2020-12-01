@@ -6,7 +6,7 @@
 /*   By: Marty <Marty@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/26 13:34:13 by Marty         #+#    #+#                 */
-/*   Updated: 2020/11/30 15:35:36 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/12/01 11:41:51 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,32 @@ int		ft_isspace(int c)
 		|| c == ' ')
 		return (1);
 	return (0);
+}
+
+void	write_backslash(t_data *e, char *str, int *i, int param)
+{
+	int	count;
+
+	count = 0;
+	if (ft_strlen(str) == 1 && str[0] == '\\' && param)
+	{
+		e->write = write(1, "\\", 1);
+		return ;
+	}
+	while (str[*i] == '\\')
+	{
+		(*i)++;
+		count++;
+	}
+	if (count % 2 != 0 && (ft_isspace(str[*i]) || str[*i] == '\0') && !param)
+	{
+		e->write = write(1, "\b\bError: multiline command", 26);
+		return ;
+	}
+	count = count / 2;
+	while (count > 0)
+	{
+		e->write = write(1, "\\", 1);
+		count--;
+	}
 }

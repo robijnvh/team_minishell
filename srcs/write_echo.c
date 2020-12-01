@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/27 14:21:34 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/30 16:00:53 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/12/01 11:28:34 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,57 +98,27 @@ void	found_env(char *str, int fd, t_data *e, int *i)
 		(*i)++;
 }
 
-void	write_backslash(t_data *e, char *str, int *i)
+void	write_echo(char *str, int param, t_data *e, int i)
 {
-	int	count;
-
-	count = 0;
-	while (str[*i] == '\\')
-	{
-		(*i)++;
-		count++;
-	}
-	if (count % 2 != 0 && (ft_isspace(str[*i]) || str[*i] == '\0'))
-	{
-		e->write = write(1, "Error: multiline command\n", 25);
-		return ;
-	}
-	if (count % 2 != 0)
-		count = ((count / 2) + 1);
-	else
-		count = count / 2;
-	while (count > 0)
-	{
-		e->write = write(1, "\\", 1);
-		count--;
-	}
-}
-
-
-werkt nog nieet!!!! print volgend getal nie
-
-
-void	write_echo(char *str, int fd, t_data *e)
-{
-	int i;
-
-	i = 2;
 	create_two_spaces(&str);
 	while (str[i])
 	{
 		if (str[i] == '\'' && !check_slash(str, &i))
-			single_quote(str, &i, fd);
+			single_quote(str, &i, 1);
 		else if (str[i] == '\"' && !check_slash(str, &i))
-			double_quote(str, &i, fd, e);
+			double_quote(str, &i, 1, e);
 		else if (str[i] == '$' && is_alpha_num(str[i + 1]) &&
 		!check_slash(str, &i))
-			found_env(str, fd, e, &i);
+			found_env(str, 1, e, &i);
 		else if (str[i] == '\\')
-			write_backslash(e, str, &i);
+		{
+			write_backslash(e, str, &i, param);
+			continue ;
+		}
 		else if (!(str[i] == '\\' && !check_slash(str, &i) &&
 		(str[i + 1] >= 32 && str[i + 1] <= 126)) &&
 		!(str[i] == '$' && str[i + 1] && ft_isquote(str[i + 1])))
-			e->write = write(fd, &str[i], 1);
+			e->write = write(1, &str[i], 1);
 		if (str[i] != 0)
 			i++;
 	}

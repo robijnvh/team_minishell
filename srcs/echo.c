@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/10 10:17:57 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/11/30 14:46:28 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/12/01 11:32:24 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ int		run_echo(t_data *e)
 	}
 	while (args[i])
 	{
-		write_echo(args[i], 1, e);
+		if (args[i] && !args[i + 1])
+			write_echo(args[i], 0, e, 2);
+		else
+			write_echo(args[i], 1, e, 2);
 		i++;
 		if (args[i] != 0 && e->write != 0)
 			ft_putchar_fd(' ', 1);
