@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/26 15:23:43 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/11/24 16:30:32 by Marty         ########   odam.nl         */
+/*   Updated: 2020/11/30 12:19:30 by robijnvanho   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*fill_str(char *str, int env, t_data *e)
 	char	*tmp;
 
 	i = 0;
-	if (env == 1 && check_for_env(e, env) != 0)
+	if (env == 1 && check_for_env(e, env) != -1)
 	{
 		str = e->env[check_for_env(e, env)];
 		while (str[i] != '=' && str[i] != '\0')
