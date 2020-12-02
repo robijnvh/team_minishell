@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/10 10:17:57 by robijnvanho   #+#    #+#                 */
-/*   Updated: 2020/12/01 11:32:24 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/12/02 10:47:26 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int		run_echo(t_data *e)
 	int		i;
 	char	**args;
 
-	i = 1;
 	args = ft_trim_args(e->params);
 	args ? 0 : free_and_stuff(e, 0, 1);
 	i = 1;

@@ -6,7 +6,7 @@
 /*   By: Marty <Marty@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 11:11:16 by Marty         #+#    #+#                 */
-/*   Updated: 2020/12/01 11:44:21 by robijnvanho   ########   odam.nl         */
+/*   Updated: 2020/12/02 10:48:06 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		check_for_env(t_data *e, int j)
 		}
 		i++;
 	}
-	return (-1); // !!!!!!!!!!!!!!!!
+	return (-1);
 }
 
 void	export_env_var3(t_data *e, int j, int k)

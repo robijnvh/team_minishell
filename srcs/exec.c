@@ -6,7 +6,7 @@
 /*   By: rvan-hou <rvan-hou@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/02 10:13:11 by rvan-hou      #+#    #+#                 */
-/*   Updated: 2020/11/27 11:58:11 by Marty         ########   odam.nl         */
+/*   Updated: 2020/12/02 10:41:09 by Marty         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ int		find_cmd_in_bin(t_data *e, char **bins, char *cmd, int i)
 
 	while (bins[i])
 	{
+		errno = 0;
 		dir = opendir(bins[i]);
-		if (errno)
-			return (-1);
-		while (1)
+		while (!errno)
 		{
 			sd = readdir(dir);
 			errno ? free_and_stuff(e, 1, 1) : 0;
@@ -34,7 +33,8 @@ int		find_cmd_in_bin(t_data *e, char **bins, char *cmd, int i)
 			if (!sd)
 				break ;
 		}
-		closedir(dir) < 0 ? free_and_stuff(e, 1, 1) : 0;
+		if (dir)
+			closedir(dir) < 0 ? free_and_stuff(e, 1, 1) : 0;
 		i++;
 	}
 	return (-1);
